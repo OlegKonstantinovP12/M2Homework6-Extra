@@ -170,23 +170,6 @@ struct Movie {
     var releaseDate: String? = nil
     var voteAverage: Double? = nil
     let genreIDS: [Int]
-    
-    
-//    static func setupGenres (genres: [Int]) -> String {
-//        let data = Genre.mockData()
-//        var result: String = ""
-//        
-//        let names = genres.compactMap{ id in
-//            data.first{ $0.id == id }?.name
-//        }
-//        for (index, name) in names.enumerated() {
-//            result.append(name)
-//            if index != names.count - 1 {
-//                result.append(", ")
-//            }
-//        }
-//        return result
-//    }
 }
 
 struct Genre {

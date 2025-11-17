@@ -15,28 +15,15 @@ class DetailsViewController: UIViewController {
     private lazy var originalNameLabel = setupLabel(text: item?.originalTitle, font: .systemFont(ofSize: 14), alignment: .center)
     private lazy var genreLabel = setupLabel(text: setupGenres(genres: item?.genreIDS), font: .italicSystemFont(ofSize: 14), alignment: .center)
     private lazy var descriptionLabel = setupLabel(text: item?.overview)
-    private lazy var voteStackView: UIStackView = {
+    private lazy var voteLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         guard let voteAverage = item?.voteAverage else { return $0 }
-        let star = UIImageView()
-        let vote = UILabel()
-        star.image = UIImage(systemName: "star.fill")
-        star.translatesAutoresizingMaskIntoConstraints = false
-        star.tintColor = UIColor(red: 1, green: 0.65, blue: 0, alpha: 1)
-        star.heightAnchor.constraint(equalToConstant: 19).isActive = true
-        star.widthAnchor.constraint(equalTo: star.heightAnchor, multiplier: 1.1).isActive = true
-        vote.translatesAutoresizingMaskIntoConstraints = false
-        vote.text = String(voteAverage)
-        vote.font = .systemFont(ofSize: 14)
-        $0.alignment = .leading
-        $0.alignment = .bottom
+        $0.text = "⭐️ " + String(voteAverage)
+        $0.font = .systemFont(ofSize: 14)
+        $0.textAlignment = .left
         
-        
-        $0.spacing = 4
-        $0.addArrangedSubview(star)
-        $0.addArrangedSubview(vote)
         return $0
-    }(UIStackView())
+    }(UILabel())
     
     private lazy var customView: UIView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +40,7 @@ class DetailsViewController: UIViewController {
         $0.addSubview(originalNameLabel)
         $0.addSubview(genreLabel)
         $0.addSubview(descriptionLabel)
-        $0.addSubview(voteStackView)
+        $0.addSubview(voteLabel)
         
         
         NSLayoutConstraint.activate([
@@ -78,10 +65,10 @@ class DetailsViewController: UIViewController {
             descriptionLabel.trailingAnchor.constraint(equalTo: $0.trailingAnchor, constant: -20),
             descriptionLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 20),
             
-            voteStackView.leadingAnchor.constraint(equalTo: $0.leadingAnchor, constant: 20),
-            voteStackView.trailingAnchor.constraint(equalTo: $0.trailingAnchor, constant: -20),
-            voteStackView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
-            voteStackView.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -10),
+            voteLabel.leadingAnchor.constraint(equalTo: $0.leadingAnchor, constant: 20),
+            voteLabel.trailingAnchor.constraint(equalTo: $0.trailingAnchor, constant: -20),
+            voteLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
+            voteLabel.bottomAnchor.constraint(equalTo: $0.bottomAnchor, constant: -10),
         ])
         
         return $0
