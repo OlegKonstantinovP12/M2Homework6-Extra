@@ -10,6 +10,7 @@ import UIKit
 class RootViewController: UIViewController {
     
     private var tableSection = TableSection.mockData()
+    
     private lazy var tableView: UITableView = {
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         $0.dataSource = self
@@ -23,10 +24,9 @@ class RootViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(tableView)
     }
-
-
 }
 
+//MARK: - UITableViewDataSource
 extension RootViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         tableSection.count
@@ -56,6 +56,8 @@ extension RootViewController: UITableViewDataSource {
         tableSection[section].footer
     }
 }
+
+//MARK: - UITableViewDelegate
 extension RootViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -71,8 +73,8 @@ extension RootViewController: UITableViewDelegate {
             vc.item = tableSection[indexPath.section].items[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
         }
-
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableSection[indexPath.section].items.remove(at: indexPath.row)

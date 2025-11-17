@@ -98,6 +98,7 @@ class UpcomingViewController: UIViewController {
         
         setupConstraints()
     }
+    
     private func setupLabel(text: String?, font: UIFont = .systemFont(ofSize: 16), alignment: NSTextAlignment = .left) -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -119,6 +120,7 @@ class UpcomingViewController: UIViewController {
         let names = genres.compactMap{ id in
             data.first{ $0.id == id }?.name
         }
+        
         for (index, name) in names.enumerated() {
             result.append(name)
             if index != names.count - 1 {

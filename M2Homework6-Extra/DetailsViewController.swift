@@ -15,6 +15,7 @@ class DetailsViewController: UIViewController {
     private lazy var originalNameLabel = setupLabel(text: item?.originalTitle, font: .systemFont(ofSize: 14), alignment: .center)
     private lazy var genreLabel = setupLabel(text: setupGenres(genres: item?.genreIDS), font: .italicSystemFont(ofSize: 14), alignment: .center)
     private lazy var descriptionLabel = setupLabel(text: item?.overview)
+    
     private lazy var voteLabel: UILabel = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         guard let voteAverage = item?.voteAverage else { return $0 }
@@ -79,17 +80,20 @@ class DetailsViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.image = UIImage(named: item.posterPath)
         $0.contentMode = .scaleAspectFit
+        //Shadow
         $0.layer.cornerRadius = 20
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOpacity = 0.8
         $0.layer.shadowOffset = .zero
         $0.layer.shadowRadius = 10
+        
         return $0
     }(UIImageView())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         view.addSubview(customView)
         
         setupConstraints()
@@ -100,6 +104,7 @@ class DetailsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         guard let text = text else { return label }
+        
         label.text = text
         label.font = font
         label.textAlignment = alignment
